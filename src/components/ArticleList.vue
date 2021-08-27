@@ -36,7 +36,8 @@ export default {
 			offset: 0,
 			limit: 15,
 			articleEnd: false,
-			showBottom:true
+			showBottom:true,
+			isLoad:true
 		};
 	},
 
@@ -108,13 +109,19 @@ export default {
 
 		//无限滚动加载
 		load() {
+			if(this.isLoad){
+				this.isLoad = false;
 			//console.log('Y轴上的滚动距离:',getScrollTop() ,'\n','浏览器视口高度:', getWindowHeight() ,'\n','文档总高度:', getScrollHeight())
-			if (
-				getScrollHeight() - (getScrollTop() + getWindowHeight()) <=
-					50 &&
-				!this.articleEnd
-			) {
-				this.addArticles();
+				setTimeout(() => {
+					if (
+						getScrollHeight() - (getScrollTop() + getWindowHeight()) <=
+							50 &&
+						!this.articleEnd
+					) {
+						this.addArticles();
+					}
+					this.isLoad = true;
+				}, 500);
 			}
 		}
 

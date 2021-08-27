@@ -12,6 +12,7 @@ export default {
 		return {
 			isShow: false,
 			isTop: false,
+			isWatch:true
 		};
 	},
 
@@ -28,19 +29,26 @@ export default {
 	methods: {
 		// 显示回到顶部按钮
 		showBtn() {
-			let scrollTop = getScrollTop();
-			if (scrollTop <= 0) {
-				this.isTop = true;
-			} else {
-				this.isTop = false;
-			}
+			if(this.isWatch){
+				this.isWatch = false;
+				setTimeout(() => {
+					let scrollTop = getScrollTop();
+					if (scrollTop <= 0) {
+						this.isTop = true;
+					} else {
+						this.isTop = false;
+					}
 
-			if (scrollTop > 300) {
-				this.isShow = true;
-			} else {
-				this.isShow = false;
+					if (scrollTop > 300) {
+						this.isShow = true;
+					} else {
+						this.isShow = false;
+					}
+					this.isWatch = true;	
+				}, 500);
 			}
 		},
+
 		backtop
 		
 	},

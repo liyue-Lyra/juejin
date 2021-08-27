@@ -26,7 +26,6 @@ export default {
 			articleIds: [],
 			articles: [],
 			articleEnd: false,
-			showBottom:true,
 			
 		};
 	},
